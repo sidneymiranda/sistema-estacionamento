@@ -1,7 +1,9 @@
 package br.ucsal.trabalhopratico.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +11,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 @Entity
-public class Cliente {
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+public class Cliente implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,15 +41,16 @@ public class Cliente {
 	@Column(name = "tipo_cliente", length = 15, nullable = false)
 	private String tipoCLiente;
 
-	@OneToMany
+	@OneToMany(mappedBy = "clienteId", cascade = CascadeType.ALL)
 	private List<Veiculo> veiculos;
 
-	@OneToMany
+	@OneToMany(mappedBy = "telefoneId", cascade = CascadeType.ALL)
 	private List<Telefone> telefones;
 
-	@OneToMany
+	@OneToMany(mappedBy = "enderecoId", cascade = CascadeType.ALL)
 	private List<Endereco> enderecos;
 
-	@OneToMany
+	@OneToMany(mappedBy = "entradaId", cascade = CascadeType.ALL)
 	private List<Entrada> entradas;
+
 }

@@ -1,5 +1,6 @@
 package br.ucsal.trabalhopratico.entities;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Calendar;
 
@@ -10,8 +11,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 @Entity
-public class Saida {
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+public class Saida implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +35,6 @@ public class Saida {
 	private BigDecimal custo;
 
 	@OneToOne
-	@Column(name = "fk_entradaId")
+	@Column(name = "fk_entrada")
 	private Long fkEntrada;
 }
